@@ -1,0 +1,27 @@
+import("//build/templates/build_template.gni")
+
+build_rust("goblin") {
+  epoch = "0.9"
+  crate_type = "rlib"
+  sources = [ "//external/goblin/v0.9.3/src/lib.rs" ]
+  inputs = []
+
+  edition = "2021"
+  deps = [
+    "//external/log/v0.4.22:log",
+    "//external/plain/v0.2.3:plain",
+    "//external/scroll/v0.12.0:scroll",
+  ]
+  features = [
+    "alloc",
+    "log",
+    "archive",
+    "elf32",
+    "elf64",
+    "endian_fd",
+  ]
+
+  rustflags = [
+    "--cap-lints=allow",  # Suppress all warnings in crates.io crates
+  ]
+}
